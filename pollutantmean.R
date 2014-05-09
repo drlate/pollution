@@ -12,10 +12,20 @@ pollutantmean <- function(directory, pollutant, id = 1:332) {
   ## Return the mean of the pollutant across all monitors list
   ## in the 'id' vector (ignoring NA values)
   
+  files <- list.files(getwd())
+  
+  for (i in id){
+    raw <- read.csv(files[i], as.is=TRUE)
+    data <- c(data, list(cleanNA(raw, pollutant)))
+  }
+  
+  data <- data[-1]
+  return(round(mean(unlist(data)),digits=3))
+  
 }
 
-
-id <- 1
-pollutant <- "sulfate"
-
-files <- list.files(getwd())
+cleanNA <- function(raw, pollutant) {
+  valid<-!is.na(raw[,pollutant])
+  return(raw[valid, pollutant])
+  rm(valid)
+}
