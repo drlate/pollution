@@ -8,26 +8,31 @@ corr <- function(directory, threshold = 0) {
   ## nitrate and sulfate; the default is 0
   
   ## Return a numeric vector of correlations
+  wd <- "G:/R_projects/pollution/"
+  setwd(wd)
+  sub <- file.path(getwd(),directory)
+  setwd(sub)
   
-  files <- list.files(path=getwd(), pattern="*.csv")
-  df <- data.frame(1:length(files))
+  files <- list.files(getwd(), pattern="*.csv")
   
-  for(i in 1:nrow(df)){
-    raw <- read.csv(file.path(getwd(), files[df[i,1]]), as.is = TRUE)
+  sulfate <- vector()
+  nitrate <- vector()
+  correls <- vector()
+  
+  for(i in 1:length(files)){
+    raw <- read.csv(file.path(getwd(), files[i]), as.is = TRUE)
     
     is_complete <- complete.cases(raw)
     cases <- length(which(is_complete))
   
     if(cases>threshold){
-      data <- c(data, raw[is_complete,2:3]) }
-
-    df[i,2] = cases
-    
+      sulfate <- raw[is_complete, "sulfate"]
+      nitrate <- raw[is_complete, "nitrate"]
+      correls <- c(correls, cor(sulfate,nitrate))
+    }
   }
   
-  data <- data[-1]
-  colnames(df)[1] <- "id"
-  colnames(df)[2] <- "cases"
+  setwd(wd)
   
-  return()
+  return(correls)
 }

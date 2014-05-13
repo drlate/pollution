@@ -11,7 +11,8 @@ pollutantmean <- function(directory, pollutant, id = 1:332) {
   
   ## Return the mean of the pollutant across all monitors list
   ## in the 'id' vector (ignoring NA values)
-  
+  wd <- "G:/R_projects/pollution/"
+  sub <- file.path(getwd(),directory)
   files <- list.files(getwd())
   
   for (i in id){
@@ -20,6 +21,7 @@ pollutantmean <- function(directory, pollutant, id = 1:332) {
   }
   
   data <- data[-1]
+  setwd(wd)
   return(round(mean(unlist(data)),digits=3))
   
 }

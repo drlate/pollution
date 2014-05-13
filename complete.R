@@ -13,6 +13,8 @@ complete <- function(directory, id) {
   ## ...
   ## where 'id' is the monitor ID number and 'nobs' is the
   ## number of complete cases
+  wd <- "G:/R_projects/pollution/"
+  sub <- file.path(getwd(),directory)
   
   files <- list.files(path=getwd(), pattern="*.csv")
   df <- data.frame(id)
@@ -24,6 +26,8 @@ complete <- function(directory, id) {
     df[i,2] = cases
   }
   colnames(df)[2] <- "nobs"
+  
+  setwd(wd)
   return(df)
 }
 
