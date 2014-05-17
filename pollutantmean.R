@@ -13,6 +13,7 @@ pollutantmean <- function(directory, pollutant, id = 1:332) {
   ## in the 'id' vector (ignoring NA values)
   wd <- "G:/R_projects/pollution/"
   sub <- file.path(getwd(),directory)
+  setwd(sub)
   files <- list.files(getwd())
   
   for (i in id){

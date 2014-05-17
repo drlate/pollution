@@ -15,6 +15,7 @@ complete <- function(directory, id) {
   ## number of complete cases
   wd <- "G:/R_projects/pollution/"
   sub <- file.path(getwd(),directory)
+  setwd(sub)
   
   files <- list.files(path=getwd(), pattern="*.csv")
   df <- data.frame(id)

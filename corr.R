@@ -15,9 +15,9 @@ corr <- function(directory, threshold = 0) {
   
   files <- list.files(getwd(), pattern="*.csv")
   
-  sulfate <- vector()
-  nitrate <- vector()
-  correls <- vector()
+  sulfate <- vector("numeric")
+  nitrate <- vector("numeric")
+  correls <- vector("numeric")
   
   for(i in 1:length(files)){
     raw <- read.csv(file.path(getwd(), files[i]), as.is = TRUE)
